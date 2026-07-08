@@ -1,0 +1,228 @@
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import { useState } from "react"
+
+export default function FiestaPage() {
+  const [giftOpen, setGiftOpen] = useState(false)
+  const [showCard, setShowCard] = useState(false)
+
+  const handleGiftClick = () => {
+    setGiftOpen(true)
+    window.setTimeout(() => setShowCard(true), 1500)
+  }
+
+  return (
+    <main className="relative min-h-dvh w-full overflow-hidden bg-[#f4ccb1]">
+      <div className="absolute inset-0" aria-hidden="true">
+        <Image
+          src="/images/fondo_fiesta.png"
+          alt="Fondo de fiesta"
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          className="object-cover object-center sm:object-bottom"
+          style={{ imageRendering: "pixelated" }}
+        />
+      </div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,247,231,0.66),transparent_58%)]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(255,255,255,0.12)] via-transparent to-[rgba(95,34,16,0.18)]" aria-hidden="true" />
+
+      <div className="relative z-10 flex min-h-dvh flex-col items-center justify-end px-3 py-4 sm:px-6 sm:py-6 lg:px-8">
+        <div className="relative w-full max-w-6xl flex-1">
+          <div className="absolute inset-x-0 bottom-0 h-[24%] bg-gradient-to-t from-[rgba(95,34,16,0.16)] to-transparent" aria-hidden="true" />
+
+          <div className="absolute bottom-24 left-[1%] sm:bottom-20 sm:left-[6%]">
+            <Image
+              src="/images/avatarchico.png"
+              alt="Santi"
+              width={260}
+              height={260}
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 768px) 40vw, 25vw"
+              className="w-[40vw] max-w-[220px] drop-shadow-[0_12px_24px_rgba(0,0,0,0.28)] sm:w-[42vw] sm:max-w-[320px]"
+            />
+          </div>
+
+          <div className="absolute bottom-20 right-[1%] sm:bottom-16 sm:right-[6%]">
+            <Image
+              src="/images/avatarchica.png"
+              alt="Tú"
+              width={260}
+              height={260}
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 768px) 40vw, 25vw"
+              className="w-[40vw] max-w-[220px] drop-shadow-[0_12px_24px_rgba(0,0,0,0.28)] sm:w-[42vw] sm:max-w-[320px]"
+            />
+          </div>
+
+          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-end gap-1.5 sm:bottom-8 sm:gap-4">
+            <Image
+              src="/images/oreogorrito.png"
+              alt="Gatito"
+              width={140}
+              height={140}
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 768px) 22vw, 14vw"
+              className="w-[18vw] max-w-[110px] drop-shadow-[0_10px_18px_rgba(0,0,0,0.22)] sm:w-[20vw] sm:max-w-[150px]"
+            />
+            <Image
+              src="/images/sakuragorrito.png"
+              alt="Gatito"
+              width={140}
+              height={140}
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 768px) 22vw, 14vw"
+              className="w-[18vw] max-w-[110px] drop-shadow-[0_10px_18px_rgba(0,0,0,0.22)] sm:w-[20vw] sm:max-w-[150px]"
+            />
+            <Image
+              src="/images/sask.png"
+              alt="Gatito"
+              width={140}
+              height={140}
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 768px) 22vw, 14vw"
+              className="w-[18vw] max-w-[110px] drop-shadow-[0_10px_18px_rgba(0,0,0,0.22)] sm:w-[20vw] sm:max-w-[150px]"
+            />
+            <Image
+              src="/images/jazz.png"
+              alt="Gatito"
+              width={140}
+              height={140}
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 768px) 22vw, 14vw"
+              className="w-[18vw] max-w-[110px] drop-shadow-[0_10px_18px_rgba(0,0,0,0.22)] sm:w-[20vw] sm:max-w-[150px]"
+            />
+          </div>
+
+          <div className="absolute left-1/2 top-[38%] -translate-x-1/2 sm:top-[32%]">
+            <div className="relative animate-[float-soft_3s_ease-in-out_infinite]">
+              <div className="absolute inset-x-4 bottom-2 h-4 rounded-full bg-[rgba(0,0,0,0.22)] blur-md" aria-hidden="true" />
+              <button
+                type="button"
+                onClick={handleGiftClick}
+                className="relative block rounded-full transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/70"
+                aria-label={giftOpen ? "Cerrar regalo" : "Abrir regalo"}
+              >
+                <Image
+                  src={giftOpen ? "/images/regaloabierto.png" : "/images/regalocerrado.png"}
+                  alt={giftOpen ? "Regalo abierto" : "Regalo sorpresa"}
+                  width={220}
+                  height={220}
+                  priority
+                  fetchPriority="high"
+                  sizes="(max-width: 768px) 32vw, 20vw"
+                  className={`relative w-[30vw] max-w-[170px] drop-shadow-[0_18px_30px_rgba(0,0,0,0.28)] transition-all duration-500 sm:w-[32vw] sm:max-w-[240px] ${giftOpen ? "scale-[1.02]" : "scale-100"}`}
+                />
+              </button>
+            </div>
+          </div>
+
+          {giftOpen && (
+            <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+              {[
+                "/images/globoamarillo1.png",
+                "/images/globoazul1.png",
+                "/images/globorojo1.png",
+                "/images/globoverde1.png",
+                "/images/globoamarillo1.png",
+                "/images/globoazul1.png",
+                "/images/globorojo1.png",
+                "/images/globoverde1.png",
+                "/images/globoamarillo1.png",
+                "/images/globoazul1.png",
+                "/images/globorojo1.png",
+                "/images/globoverde1.png",
+              ].map((src, index) => {
+                const positions = [
+                  "left-[4%] top-[82%]",
+                  "left-[14%] top-[84%]",
+                  "left-[24%] top-[79%]",
+                  "left-[34%] top-[86%]",
+                  "left-[46%] top-[83%]",
+                  "left-[58%] top-[87%]",
+                  "left-[70%] top-[81%]",
+                  "left-[82%] top-[85%]",
+                  "left-[8%] top-[77%]",
+                  "left-[20%] top-[80%]",
+                  "left-[64%] top-[78%]",
+                  "left-[76%] top-[76%]",
+                ]
+                const widths = [
+                  "w-[10vw] max-w-[44px] sm:w-[8vw] sm:max-w-[58px]",
+                  "w-[9vw] max-w-[40px] sm:w-[7vw] sm:max-w-[54px]",
+                  "w-[11vw] max-w-[48px] sm:w-[8vw] sm:max-w-[60px]",
+                  "w-[10vw] max-w-[44px] sm:w-[7vw] sm:max-w-[56px]",
+                  "w-[9vw] max-w-[40px] sm:w-[7vw] sm:max-w-[54px]",
+                  "w-[10vw] max-w-[44px] sm:w-[8vw] sm:max-w-[58px]",
+                  "w-[9vw] max-w-[40px] sm:w-[7vw] sm:max-w-[54px]",
+                  "w-[11vw] max-w-[48px] sm:w-[8vw] sm:max-w-[60px]",
+                  "w-[10vw] max-w-[44px] sm:w-[8vw] sm:max-w-[58px]",
+                  "w-[9vw] max-w-[40px] sm:w-[7vw] sm:max-w-[54px]",
+                  "w-[10vw] max-w-[44px] sm:w-[8vw] sm:max-w-[58px]",
+                  "w-[9vw] max-w-[40px] sm:w-[7vw] sm:max-w-[54px]",
+                ]
+                const durations = ["2.3s", "2.7s", "2.1s", "2.5s", "2.8s", "2.2s", "2.6s", "2.4s", "2.9s", "2.3s", "2.5s", "2.7s"]
+
+                return (
+                  <div
+                    key={`${src}-${index}`}
+                    className={`absolute ${positions[index]} ${widths[index]} opacity-100`}
+                    style={{
+                      animation: `balloon-rise ${durations[index]} ease-out forwards`,
+                      animationDelay: `${index * 0.05}s`,
+                    }}
+                  >
+                    <Image
+                      src={src}
+                      alt=""
+                      width={90}
+                      height={90}
+                      className="w-full"
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          )}
+
+          {showCard && (
+            <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-4 py-6 sm:px-6">
+              <div className="relative w-full max-w-xl rounded-[1.5rem] border-[6px] border-[oklch(0.4_0.08_20)] bg-[oklch(0.97_0.04_70)] p-4 shadow-[10px_10px_0_oklch(0.4_0.08_20/0.45)] sm:p-6">
+                <div className="absolute inset-0 rounded-[1.2rem] border-[4px] border-white/60" aria-hidden="true" />
+                <div className="relative z-10 text-center">
+                  <p className="text-[10px] font-black uppercase tracking-[0.35em] text-[oklch(0.46_0.08_20)] sm:text-[12px]">
+                    Carta de cumpleaños
+                  </p>
+                  <h2 className="mt-3 text-xl font-black uppercase tracking-[0.24em] text-[oklch(0.4_0.08_20)] sm:text-2xl">
+                    ¡Mi nene, Felices 22!
+                  </h2>
+                  <div className="mx-auto mt-4 max-w-lg space-y-2 text-[11px] leading-6 text-[oklch(0.38_0.08_20)] sm:text-sm sm:leading-7" style={{ fontFamily: "var(--font-pixel-title)" }}>
+                    <p>Hice este pequeño detallito con mucho amor para ti</p>
+                    <p>Espero que te guste mucho y que te haga muy feliz en este día tan especial</p>
+                    <p>Para mi gatito lindo, con todo mi corazon, de tu Haru.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <Link
+          href="/"
+          className="mt-4 rounded-full border border-[oklch(0.4_0.08_20)] bg-[oklch(0.74_0.15_12)] px-3 py-2 text-[11px] font-black uppercase tracking-[0.16em] text-[oklch(0.98_0.03_70)] shadow-[3px_3px_0_oklch(0.4_0.08_20/0.4)] transition-transform hover:-translate-y-0.5 sm:mt-6 sm:px-4 sm:text-sm"
+        >
+          Volver a encender la vela
+        </Link>
+      </div>
+    </main>
+  )
+}
