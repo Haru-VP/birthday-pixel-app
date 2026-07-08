@@ -349,6 +349,44 @@
     radial-gradient(circle at 50% 50%, oklch(0.8 0.008 250 / 0.97), oklch(0.72 0.01 250 / 0.9) 45%, oklch(0.65 0.01 250 / 0.82) 80%) center center / 220% 220% no-repeat;
 }
 
+/* Velo de humo de ENTRADA en la fiesta: empieza cubriendo y se disipa,
+   continuando visualmente la transición de la primera pantalla */
+.scene-enter-veil {
+  background:
+    radial-gradient(circle at 50% 50%, oklch(0.8 0.008 250 / 0.97), oklch(0.72 0.01 250 / 0.9) 45%, oklch(0.65 0.01 250 / 0.82) 80%) center center / 220% 220% no-repeat;
+  animation: scene-smoke-clear 1.5s ease-out forwards;
+}
+
+/* Bocanadas de humo que se levantan al revelar la escena */
+.scene-enter-puff {
+  position: absolute;
+  left: 50%;
+  bottom: 30%;
+  width: 320px;
+  height: 320px;
+  margin-left: -160px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, oklch(0.85 0.006 250 / 0.9), oklch(0.72 0.01 250 / 0.5) 50%, transparent 72%);
+  filter: blur(6px);
+  opacity: 0;
+  transform: translateY(0) scale(0.6);
+}
+.scene-enter-puff-1 {
+  animation: smoke-billow-left 1.7s ease-out 0s forwards;
+}
+.scene-enter-puff-2 {
+  width: 400px;
+  height: 400px;
+  margin-left: -200px;
+  animation: smoke-billow 1.9s ease-out 0.1s forwards;
+}
+.scene-enter-puff-3 {
+  width: 360px;
+  height: 360px;
+  margin-left: -180px;
+  animation: smoke-billow-right 1.8s ease-out 0.2s forwards;
+}
+
 /* Bocanadas individuales de humo */
 .smoke-puff {
   position: absolute;

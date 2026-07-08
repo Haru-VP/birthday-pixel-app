@@ -2,16 +2,30 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function FiestaPage() {
   const [giftOpen, setGiftOpen] = useState(false)
   const [showCard, setShowCard] = useState(false)
+  const [entering, setEntering] = useState(true)
+
+  // El humo de entrada se disipa y luego se retira del DOM
+  useEffect(() => {
+    const timer = window.setTimeout(() => setEntering(false), 1800)
+    return () => window.clearTimeout(timer)
+  }, [])
 
   const handleGiftClick = () => {
     setGiftOpen(true)
     window.setTimeout(() => setShowCard(true), 1500)
   }
+
+  const cats = [
+    { src: "/images/oreogorrito.png", delay: "0.8s", floatDelay: "1.5s", floatDur: "3.2s" },
+    { src: "/images/sakuragorrito.png", delay: "0.9s", floatDelay: "1.7s", floatDur: "3.6s" },
+    { src: "/images/sask.png", delay: "1s", floatDelay: "1.6s", floatDur: "3.4s" },
+    { src: "/images/jazz.png", delay: "1.1s", floatDelay: "1.8s", floatDur: "3.8s" },
+  ]
 
   return (
     <main className="relative min-h-dvh w-full overflow-hidden bg-[#f4ccb1]">
@@ -35,94 +49,86 @@ export default function FiestaPage() {
           <div className="absolute inset-x-0 bottom-0 h-[24%] bg-gradient-to-t from-[rgba(95,34,16,0.16)] to-transparent" aria-hidden="true" />
 
           <div className="absolute bottom-24 left-[1%] sm:bottom-20 sm:left-[6%]">
-            <Image
-              src="/images/avatarchico.png"
-              alt="Santi"
-              width={260}
-              height={260}
-              priority
-              fetchPriority="high"
-              sizes="(max-width: 768px) 40vw, 25vw"
-              className="w-[40vw] max-w-[220px] drop-shadow-[0_12px_24px_rgba(0,0,0,0.28)] sm:w-[42vw] sm:max-w-[320px]"
-            />
+            <div className="animate-rise-in" style={{ animationDelay: "0.5s" }}>
+              <div className="animate-float-delayed" style={{ animationDelay: "1.4s", animationDuration: "4s" }}>
+                <Image
+                  src="/images/avatarchico.png"
+                  alt="Santi"
+                  width={260}
+                  height={260}
+                  priority
+                  fetchPriority="high"
+                  sizes="(max-width: 768px) 40vw, 25vw"
+                  className="w-[40vw] max-w-[220px] drop-shadow-[0_12px_24px_rgba(0,0,0,0.28)] sm:w-[42vw] sm:max-w-[320px]"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="absolute bottom-20 right-[1%] sm:bottom-16 sm:right-[6%]">
-            <Image
-              src="/images/avatarchica.png"
-              alt="Tú"
-              width={260}
-              height={260}
-              priority
-              fetchPriority="high"
-              sizes="(max-width: 768px) 40vw, 25vw"
-              className="w-[40vw] max-w-[220px] drop-shadow-[0_12px_24px_rgba(0,0,0,0.28)] sm:w-[42vw] sm:max-w-[320px]"
-            />
+            <div className="animate-rise-in" style={{ animationDelay: "0.65s" }}>
+              <div className="animate-float-delayed" style={{ animationDelay: "1.6s", animationDuration: "4.4s" }}>
+                <Image
+                  src="/images/avatarchica.png"
+                  alt="Tú"
+                  width={260}
+                  height={260}
+                  priority
+                  fetchPriority="high"
+                  sizes="(max-width: 768px) 40vw, 25vw"
+                  className="w-[40vw] max-w-[220px] drop-shadow-[0_12px_24px_rgba(0,0,0,0.28)] sm:w-[42vw] sm:max-w-[320px]"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-end gap-1.5 sm:bottom-8 sm:gap-4">
-            <Image
-              src="/images/oreogorrito.png"
-              alt="Gatito"
-              width={140}
-              height={140}
-              priority
-              fetchPriority="high"
-              sizes="(max-width: 768px) 22vw, 14vw"
-              className="w-[18vw] max-w-[110px] drop-shadow-[0_10px_18px_rgba(0,0,0,0.22)] sm:w-[20vw] sm:max-w-[150px]"
-            />
-            <Image
-              src="/images/sakuragorrito.png"
-              alt="Gatito"
-              width={140}
-              height={140}
-              priority
-              fetchPriority="high"
-              sizes="(max-width: 768px) 22vw, 14vw"
-              className="w-[18vw] max-w-[110px] drop-shadow-[0_10px_18px_rgba(0,0,0,0.22)] sm:w-[20vw] sm:max-w-[150px]"
-            />
-            <Image
-              src="/images/sask.png"
-              alt="Gatito"
-              width={140}
-              height={140}
-              priority
-              fetchPriority="high"
-              sizes="(max-width: 768px) 22vw, 14vw"
-              className="w-[18vw] max-w-[110px] drop-shadow-[0_10px_18px_rgba(0,0,0,0.22)] sm:w-[20vw] sm:max-w-[150px]"
-            />
-            <Image
-              src="/images/jazz.png"
-              alt="Gatito"
-              width={140}
-              height={140}
-              priority
-              fetchPriority="high"
-              sizes="(max-width: 768px) 22vw, 14vw"
-              className="w-[18vw] max-w-[110px] drop-shadow-[0_10px_18px_rgba(0,0,0,0.22)] sm:w-[20vw] sm:max-w-[150px]"
-            />
+            {cats.map((cat) => (
+              <div key={cat.src} className="animate-rise-in" style={{ animationDelay: cat.delay }}>
+                <div
+                  className="animate-float-delayed"
+                  style={{ animationDelay: cat.floatDelay, animationDuration: cat.floatDur }}
+                >
+                  <Image
+                    src={cat.src}
+                    alt="Gatito"
+                    width={140}
+                    height={140}
+                    priority
+                    fetchPriority="high"
+                    sizes="(max-width: 768px) 22vw, 14vw"
+                    className="w-[18vw] max-w-[110px] drop-shadow-[0_10px_18px_rgba(0,0,0,0.22)] sm:w-[20vw] sm:max-w-[150px]"
+                  />
+                </div>
+              </div>
+            ))}
           </div>
 
           <div className="absolute left-1/2 top-[38%] -translate-x-1/2 sm:top-[32%]">
-            <div className="relative animate-[float-soft_3s_ease-in-out_infinite]">
-              <div className="absolute inset-x-4 bottom-2 h-4 rounded-full bg-[rgba(0,0,0,0.22)] blur-md" aria-hidden="true" />
-              <button
-                type="button"
-                onClick={handleGiftClick}
-                className="relative block rounded-full transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/70"
-                aria-label={giftOpen ? "Cerrar regalo" : "Abrir regalo"}
+            <div className="animate-pop-in" style={{ animationDelay: "1.1s" }}>
+              <div
+                className="relative animate-[float-soft_3s_ease-in-out_infinite]"
+                style={{ animationDelay: "1.8s" }}
               >
-                <Image
-                  src={giftOpen ? "/images/regaloabierto.png" : "/images/regalocerrado.png"}
-                  alt={giftOpen ? "Regalo abierto" : "Regalo sorpresa"}
-                  width={220}
-                  height={220}
-                  priority
-                  fetchPriority="high"
-                  sizes="(max-width: 768px) 32vw, 20vw"
-                  className={`relative w-[30vw] max-w-[170px] drop-shadow-[0_18px_30px_rgba(0,0,0,0.28)] transition-all duration-500 sm:w-[32vw] sm:max-w-[240px] ${giftOpen ? "scale-[1.02]" : "scale-100"}`}
-                />
-              </button>
+                <div className="absolute inset-x-4 bottom-2 h-4 rounded-full bg-[rgba(0,0,0,0.22)] blur-md" aria-hidden="true" />
+                <button
+                  type="button"
+                  onClick={handleGiftClick}
+                  className="relative block rounded-full transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/70"
+                  aria-label={giftOpen ? "Cerrar regalo" : "Abrir regalo"}
+                >
+                  <Image
+                    src={giftOpen ? "/images/regaloabierto.png" : "/images/regalocerrado.png"}
+                    alt={giftOpen ? "Regalo abierto" : "Regalo sorpresa"}
+                    width={220}
+                    height={220}
+                    priority
+                    fetchPriority="high"
+                    sizes="(max-width: 768px) 32vw, 20vw"
+                    className={`relative w-[30vw] max-w-[170px] drop-shadow-[0_18px_30px_rgba(0,0,0,0.28)] transition-all duration-500 sm:w-[32vw] sm:max-w-[240px] ${giftOpen ? "scale-[1.02]" : "scale-100"}`}
+                  />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -196,7 +202,7 @@ export default function FiestaPage() {
 
           {showCard && (
             <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-4 py-6 sm:px-6">
-              <div className="relative w-full max-w-xl rounded-[1.5rem] border-[6px] border-[oklch(0.4_0.08_20)] bg-[oklch(0.97_0.04_70)] p-4 shadow-[10px_10px_0_oklch(0.4_0.08_20/0.45)] sm:p-6">
+              <div className="animate-card-pop relative w-full max-w-xl rounded-[1.5rem] border-[6px] border-[oklch(0.4_0.08_20)] bg-[oklch(0.97_0.04_70)] p-4 shadow-[10px_10px_0_oklch(0.4_0.08_20/0.45)] sm:p-6">
                 <div className="absolute inset-0 rounded-[1.2rem] border-[4px] border-white/60" aria-hidden="true" />
                 <div className="relative z-10 text-center">
                   <p className="text-[10px] font-black uppercase tracking-[0.35em] text-[oklch(0.46_0.08_20)] sm:text-[12px]">
@@ -218,11 +224,22 @@ export default function FiestaPage() {
 
         <Link
           href="/"
-          className="mt-4 rounded-full border border-[oklch(0.4_0.08_20)] bg-[oklch(0.74_0.15_12)] px-3 py-2 text-[11px] font-black uppercase tracking-[0.16em] text-[oklch(0.98_0.03_70)] shadow-[3px_3px_0_oklch(0.4_0.08_20/0.4)] transition-transform hover:-translate-y-0.5 sm:mt-6 sm:px-4 sm:text-sm"
+          className="animate-rise-in mt-4 rounded-full border border-[oklch(0.4_0.08_20)] bg-[oklch(0.74_0.15_12)] px-3 py-2 text-[11px] font-black uppercase tracking-[0.16em] text-[oklch(0.98_0.03_70)] shadow-[3px_3px_0_oklch(0.4_0.08_20/0.4)] transition-transform hover:-translate-y-0.5 sm:mt-6 sm:px-4 sm:text-sm"
+          style={{ animationDelay: "1.3s" }}
         >
           Volver a encender la vela
         </Link>
       </div>
+
+      {/* Entrada: el humo gris heredado de la transición se disipa revelando la fiesta */}
+      {entering && (
+        <div className="pointer-events-none absolute inset-0 z-50 overflow-hidden" aria-hidden="true">
+          <div className="scene-enter-veil absolute inset-0" />
+          <span className="scene-enter-puff scene-enter-puff-1" />
+          <span className="scene-enter-puff scene-enter-puff-2" />
+          <span className="scene-enter-puff scene-enter-puff-3" />
+        </div>
+      )}
     </main>
   )
 }
