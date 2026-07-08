@@ -49,8 +49,8 @@ export default function FiestaPage() {
           <div className="absolute inset-x-0 bottom-0 h-[24%] bg-gradient-to-t from-[rgba(95,34,16,0.16)] to-transparent" aria-hidden="true" />
 
           <div className="absolute bottom-24 left-[1%] sm:bottom-20 sm:left-[6%]">
-            <div className="animate-rise-in" style={{ animationDelay: "0.5s" }}>
-              <div className="animate-float-delayed" style={{ animationDelay: "1.4s", animationDuration: "4s" }}>
+            <div className="fx-rise-in" style={{ animationDelay: "0.5s" }}>
+              <div className="fx-float" style={{ animationDelay: "1.4s", animationDuration: "4s" }}>
                 <Image
                   src="/images/avatarchico.png"
                   alt="Santi"
@@ -66,8 +66,8 @@ export default function FiestaPage() {
           </div>
 
           <div className="absolute bottom-20 right-[1%] sm:bottom-16 sm:right-[6%]">
-            <div className="animate-rise-in" style={{ animationDelay: "0.65s" }}>
-              <div className="animate-float-delayed" style={{ animationDelay: "1.6s", animationDuration: "4.4s" }}>
+            <div className="fx-rise-in" style={{ animationDelay: "0.65s" }}>
+              <div className="fx-float" style={{ animationDelay: "1.6s", animationDuration: "4.4s" }}>
                 <Image
                   src="/images/avatarchica.png"
                   alt="Tú"
@@ -84,9 +84,9 @@ export default function FiestaPage() {
 
           <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-end gap-1.5 sm:bottom-8 sm:gap-4">
             {cats.map((cat) => (
-              <div key={cat.src} className="animate-rise-in" style={{ animationDelay: cat.delay }}>
+              <div key={cat.src} className="fx-rise-in" style={{ animationDelay: cat.delay }}>
                 <div
-                  className="animate-float-delayed"
+                  className="fx-float"
                   style={{ animationDelay: cat.floatDelay, animationDuration: cat.floatDur }}
                 >
                   <Image
@@ -105,7 +105,7 @@ export default function FiestaPage() {
           </div>
 
           <div className="absolute left-1/2 top-[38%] -translate-x-1/2 sm:top-[32%]">
-            <div className="animate-pop-in" style={{ animationDelay: "1.1s" }}>
+            <div className="fx-pop-in" style={{ animationDelay: "1.1s" }}>
               <div
                 className="relative animate-[float-soft_3s_ease-in-out_infinite]"
                 style={{ animationDelay: "1.8s" }}
@@ -202,7 +202,7 @@ export default function FiestaPage() {
 
           {showCard && (
             <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-4 py-6 sm:px-6">
-              <div className="animate-card-pop relative w-full max-w-xl rounded-[1.5rem] border-[6px] border-[oklch(0.4_0.08_20)] bg-[oklch(0.97_0.04_70)] p-4 shadow-[10px_10px_0_oklch(0.4_0.08_20/0.45)] sm:p-6">
+              <div className="fx-card-pop relative w-full max-w-xl rounded-[1.5rem] border-[6px] border-[oklch(0.4_0.08_20)] bg-[oklch(0.97_0.04_70)] p-4 shadow-[10px_10px_0_oklch(0.4_0.08_20/0.45)] sm:p-6">
                 <div className="absolute inset-0 rounded-[1.2rem] border-[4px] border-white/60" aria-hidden="true" />
                 <div className="relative z-10 text-center">
                   <p className="text-[10px] font-black uppercase tracking-[0.35em] text-[oklch(0.46_0.08_20)] sm:text-[12px]">
@@ -224,7 +224,7 @@ export default function FiestaPage() {
 
         <Link
           href="/"
-          className="animate-rise-in mt-4 rounded-full border border-[oklch(0.4_0.08_20)] bg-[oklch(0.74_0.15_12)] px-3 py-2 text-[11px] font-black uppercase tracking-[0.16em] text-[oklch(0.98_0.03_70)] shadow-[3px_3px_0_oklch(0.4_0.08_20/0.4)] transition-transform hover:-translate-y-0.5 sm:mt-6 sm:px-4 sm:text-sm"
+          className="fx-rise-in mt-4 rounded-full border border-[oklch(0.4_0.08_20)] bg-[oklch(0.74_0.15_12)] px-3 py-2 text-[11px] font-black uppercase tracking-[0.16em] text-[oklch(0.98_0.03_70)] shadow-[3px_3px_0_oklch(0.4_0.08_20/0.4)] transition-transform hover:-translate-y-0.5 sm:mt-6 sm:px-4 sm:text-sm"
           style={{ animationDelay: "1.3s" }}
         >
           Volver a encender la vela
