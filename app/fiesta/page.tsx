@@ -37,7 +37,7 @@ export default function FiestaPage() {
           priority
           fetchPriority="high"
           sizes="100vw"
-          className="object-cover object-center sm:object-bottom lg:object-contain lg:object-top"
+          className="object-cover object-center sm:object-bottom"
           style={{ imageRendering: "pixelated" }}
         />
       </div>
@@ -201,100 +201,9 @@ export default function FiestaPage() {
           )}
 
           {showCard && (
-            <div className="pointer-events-none absolute inset-0 z-20 overflow-hidden" aria-hidden="true">
-              {Array.from({ length: 40 }).map((_, i) => {
-                const colors = [
-                  "oklch(0.74 0.15 12)", // rojo/rosa fuerte
-                  "oklch(0.82 0.13 75)", // amarillo cálido
-                  "oklch(0.8 0.12 350)", // rosita
-                  "oklch(0.72 0.14 145)", // verde
-                  "oklch(0.75 0.13 240)", // azul
-                  "oklch(0.97 0.04 70)", // crema
-                ]
-                const left = (i * 97) % 100
-                const size = 6 + (i % 4) * 2
-                const duration = 3.4 + (i % 5) * 0.6
-                const delay = -((i * 0.37) % 4)
-                const sway = 1.6 + (i % 3) * 0.5
-                const isHeart = i % 5 === 0
-                const isRose = i % 5 === 2
-                const rounded = i % 3 === 0 ? "9999px" : "1px"
-
-                if (isHeart || isRose) {
-                  return (
-                    <img
-                      key={i}
-                      src={isHeart ? "/images/pixel-heart.png" : "/images/pixel-rose.png"}
-                      alt=""
-                      className="confetti-piece"
-                      style={{
-                        left: `${left}%`,
-                        width: `${size + 8}px`,
-                        height: "auto",
-                        animation: `confetti-fall ${duration}s linear ${delay}s infinite, confetti-sway ${sway}s ease-in-out ${delay}s infinite`,
-                      }}
-                    />
-                  )
-                }
-
-                return (
-                  <span
-                    key={i}
-                    className="confetti-piece block"
-                    style={{
-                      left: `${left}%`,
-                      width: `${size}px`,
-                      height: `${size}px`,
-                      borderRadius: rounded,
-                      backgroundColor: colors[i % colors.length],
-                      animation: `confetti-fall ${duration}s linear ${delay}s infinite, confetti-sway ${sway}s ease-in-out ${delay}s infinite`,
-                    }}
-                  />
-                )
-              })}
-            </div>
-          )}
-
-          {showCard && (
-            <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center px-4 py-6 sm:px-6">
+            <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-4 py-6 sm:px-6">
               <div className="fx-card-pop relative w-full max-w-xl rounded-[1.5rem] border-[6px] border-[oklch(0.4_0.08_20)] bg-[oklch(0.97_0.04_70)] p-4 shadow-[10px_10px_0_oklch(0.4_0.08_20/0.45)] sm:p-6">
                 <div className="absolute inset-0 rounded-[1.2rem] border-[4px] border-white/60" aria-hidden="true" />
-
-                {/* Decoración pixel art: corazones y rositas en el borde */}
-                <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-                  {/* Esquinas */}
-                  <img src="/images/pixel-heart.png" alt="" className="pixelated absolute -left-3 -top-3 w-7 -rotate-12 sm:w-9" />
-                  <img src="/images/pixel-heart.png" alt="" className="pixelated absolute -right-3 -top-3 w-7 rotate-12 sm:w-9" />
-                  <img src="/images/pixel-rose.png" alt="" className="pixelated absolute -bottom-3 -left-3 w-7 rotate-6 sm:w-9" />
-                  <img src="/images/pixel-rose.png" alt="" className="pixelated absolute -bottom-3 -right-3 w-7 -rotate-6 sm:w-9" />
-
-                  {/* Borde superior */}
-                  {[22, 40, 60, 78].map((leftPct, i) => (
-                    <img
-                      key={`top-${leftPct}`}
-                      src={i % 2 === 0 ? "/images/pixel-rose.png" : "/images/pixel-heart.png"}
-                      alt=""
-                      className="pixelated absolute -top-3 w-5 sm:w-6"
-                      style={{ left: `${leftPct}%` }}
-                    />
-                  ))}
-
-                  {/* Borde inferior */}
-                  {[22, 40, 60, 78].map((leftPct, i) => (
-                    <img
-                      key={`bottom-${leftPct}`}
-                      src={i % 2 === 0 ? "/images/pixel-heart.png" : "/images/pixel-rose.png"}
-                      alt=""
-                      className="pixelated absolute -bottom-3 w-5 sm:w-6"
-                      style={{ left: `${leftPct}%` }}
-                    />
-                  ))}
-
-                  {/* Bordes laterales */}
-                  <img src="/images/pixel-heart.png" alt="" className="pixelated absolute -left-3 top-1/2 w-5 -translate-y-1/2 sm:w-6" />
-                  <img src="/images/pixel-heart.png" alt="" className="pixelated absolute -right-3 top-1/2 w-5 -translate-y-1/2 sm:w-6" />
-                </div>
-
                 <div className="relative z-10 text-center">
                   <p className="text-[10px] font-black uppercase tracking-[0.35em] text-[oklch(0.46_0.08_20)] sm:text-[12px]">
                     Carta de cumpleaños
