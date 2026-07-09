@@ -31,6 +31,7 @@ export type MusicVoice = "soft" | "party"
 export class BirthdayMusic {
   private ctx: AudioContext | null = null
   private master: GainNode | null = null
+  private voiceBus: GainNode | null = null
   private timer: ReturnType<typeof setTimeout> | null = null
   private stopped = true
   private muted = false
