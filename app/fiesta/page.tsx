@@ -206,15 +206,15 @@ export default function FiestaPage() {
                 <div className="absolute inset-0 rounded-[1.2rem] border-[4px] border-white/60" aria-hidden="true" />
                 <div className="relative z-10 text-center">
                   <p className="text-[10px] font-black uppercase tracking-[0.35em] text-[oklch(0.46_0.08_20)] sm:text-[12px]">
-                    Carta de cumpleaños
+                    ✨Carta de cumpleaños✨
                   </p>
                   <h2 className="mt-3 text-xl font-black uppercase tracking-[0.24em] text-[oklch(0.4_0.08_20)] sm:text-2xl">
-                    ¡Mi nene, Felices 22!
+                    ¡Mi nene, Felices 22!💕
                   </h2>
                   <div className="mx-auto mt-4 max-w-lg space-y-2 text-[11px] leading-6 text-[oklch(0.38_0.08_20)] sm:text-sm sm:leading-7" style={{ fontFamily: "var(--font-pixel-title)" }}>
                     <p>Hice este pequeño detallito con mucho amor para ti</p>
                     <p>Espero que te guste mucho y que te haga muy feliz en este día tan especial</p>
-                    <p>Para mi gatito lindo, con todo mi corazon, de tu Haru.</p>
+                    <p>Para mi gatito lindo, con todo mi corazon, de tu Haru💘 </p>
                   </div>
                 </div>
               </div>
