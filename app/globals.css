@@ -288,6 +288,35 @@
   }
 }
 
+/* Confetti que cae en bucle continuo mientras la carta está abierta */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-12vh) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(112vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+/* Ligero vaivén horizontal para que el confetti no caiga recto */
+@keyframes confetti-sway {
+  0%,
+  100% {
+    margin-left: -6px;
+  }
+  50% {
+    margin-left: 6px;
+  }
+}
+
 @keyframes title-pop {
   0% {
     transform: scale(0.7) translateY(20px);
@@ -404,6 +433,14 @@
 /* Flotar suave que arranca DESPUÉS de la entrada (se combina con delay) */
 .fx-float {
   animation: float-soft 3.4s ease-in-out infinite;
+}
+
+/* Pieza individual de confetti (pixel), cae en bucle mientras la carta está abierta */
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  image-rendering: pixelated;
+  will-change: transform;
 }
 
 /* ===== Transición de humo gris ===== */
