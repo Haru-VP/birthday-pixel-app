@@ -37,7 +37,7 @@ export default function FiestaPage() {
           priority
           fetchPriority="high"
           sizes="100vw"
-          className="object-cover object-center sm:object-bottom"
+          className="object-cover object-center lg:object-top"
           style={{ imageRendering: "pixelated" }}
         />
       </div>
