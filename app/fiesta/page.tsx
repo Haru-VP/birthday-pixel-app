@@ -2,18 +2,72 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { BirthdayMusic } from "@/lib/birthday-music"
 
 export default function FiestaPage() {
   const [giftOpen, setGiftOpen] = useState(false)
   const [showCard, setShowCard] = useState(false)
   const [entering, setEntering] = useState(true)
+  const [muted, setMuted] = useState(false)
+
+  const musicRef = useRef<BirthdayMusic | null>(null)
+  const giftOpenRef = useRef(false)
 
   // El humo de entrada se disipa y luego se retira del DOM
   useEffect(() => {
     const timer = window.setTimeout(() => setEntering(false), 1800)
     return () => window.clearTimeout(timer)
   }, [])
+
+  // Música: versión suave al abrir la página; si el navegador bloquea el
+  // autoplay, se inicia con la primera interacción del usuario.
+  useEffect(() => {
+    const music = new BirthdayMusic()
+    musicRef.current = music
+
+    const kickstart = () => {
+      const m = musicRef.current
+      if (!m || m.isRunning()) return
+      m.play(giftOpenRef.current ? "party" : "soft")
+    }
+
+    void music.play("soft").then((running) => {
+      if (!running) {
+        window.addEventListener("pointerdown", kickstart)
+        window.addEventListener("keydown", kickstart)
+      }
+    })
+
+    return () => {
+      window.removeEventListener("pointerdown", kickstart)
+      window.removeEventListener("keydown", kickstart)
+      music.dispose()
+    }
+  }, [])
+
+  // Al abrir el regalo, cambia a la versión alegre
+  useEffect(() => {
+    giftOpenRef.current = giftOpen
+    if (giftOpen) {
+      musicRef.current?.play("party")
+    }
+  }, [giftOpen])
+
+  const toggleMuted = () => {
+    setMuted((prev) => {
+      const next = !prev
+      const m = musicRef.current
+      if (m) {
+        m.setMuted(next)
+        // Si estaba bloqueado por autoplay, al desmutear también intentamos arrancar
+        if (!next && !m.isRunning()) {
+          m.play(giftOpenRef.current ? "party" : "soft")
+        }
+      }
+      return next
+    })
+  }
 
   const handleGiftClick = () => {
     setGiftOpen(true)
@@ -37,12 +91,34 @@ export default function FiestaPage() {
           priority
           fetchPriority="high"
           sizes="100vw"
-          className="object-cover object-center lg:object-top"
+          className="object-cover object-center sm:object-bottom"
           style={{ imageRendering: "pixelated" }}
         />
       </div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,247,231,0.66),transparent_58%)]" aria-hidden="true" />
       <div className="absolute inset-0 bg-gradient-to-b from-[rgba(255,255,255,0.12)] via-transparent to-[rgba(95,34,16,0.18)]" aria-hidden="true" />
+
+      <button
+        type="button"
+        onClick={toggleMuted}
+        aria-pressed={muted}
+        aria-label={muted ? "Activar música" : "Silenciar música"}
+        className="absolute right-3 top-3 z-40 flex h-11 w-11 items-center justify-center rounded-full border-2 border-[oklch(0.4_0.08_20)] bg-[oklch(0.97_0.04_70)] text-[oklch(0.4_0.08_20)] shadow-[3px_3px_0_oklch(0.4_0.08_20/0.4)] transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white/70 sm:right-5 sm:top-5 sm:h-12 sm:w-12"
+      >
+        {muted ? (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M11 5 6 9H2v6h4l5 4z" fill="currentColor" stroke="none" />
+            <line x1="23" y1="9" x2="17" y2="15" />
+            <line x1="17" y1="9" x2="23" y2="15" />
+          </svg>
+        ) : (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M11 5 6 9H2v6h4l5 4z" fill="currentColor" stroke="none" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+          </svg>
+        )}
+      </button>
 
       <div className="relative z-10 flex min-h-dvh flex-col items-center justify-end px-3 py-4 sm:px-6 sm:py-6 lg:px-8">
         <div className="relative w-full max-w-6xl flex-1">
